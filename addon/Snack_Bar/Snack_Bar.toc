@@ -1,0 +1,12 @@
+## Interface: 16001
+## Title: Snack Bar
+## Notes: Always shows the best food, water and potions in your bags, ready to click. Type /snack for options.
+## Author: NervzZ
+## Version: 1.0.0
+## IconTexture: Interface\Icons\INV_Misc_Food_15
+## SavedVariablesPerCharacter: Snack_BarDB
+
+Data.lua
+Core.lua
+Bars.lua
+Options.lua

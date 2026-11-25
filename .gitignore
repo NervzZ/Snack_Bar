@@ -1,0 +1,7 @@
+CLAUDE.md
+CC-Session-Logs/
+.claude/
+tools/cache/
+dist/
+.release/
+__pycache__/
