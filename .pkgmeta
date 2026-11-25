@@ -4,7 +4,6 @@ move-folders:
   Snack_Bar/addon/Snack_Bar: Snack_Bar
 
 ignore:
-  - assets
   - tools
   - README.md
 
