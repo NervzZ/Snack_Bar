@@ -5,6 +5,7 @@
 ## Version: 1.0.0
 ## IconTexture: Interface\Icons\INV_Misc_Food_15
 ## SavedVariablesPerCharacter: Snack_BarDB
+## X-Curse-Project-ID: 1829540
 
 Data.lua
 Core.lua
