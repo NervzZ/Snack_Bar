@@ -1,22 +1,50 @@
 name: Release
 
-# A pushed tag (for example 1.0.1) builds the zip and uploads it to CurseForge and GitHub.
+# A merge to main with a new version tags it and starts the publish workflow on the tag.
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
 
 permissions:
   contents: write
+  actions: write
+
+concurrency: release
 
 jobs:
-  release:
+  tag:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: BigWigsMods/packager@v2
+      - name: Tag a new version
         env:
+          GH_TOKEN: ${{ github.token }}
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
-          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(bash tools/version.sh)
+          if ! grep -q '^## X-Curse-Project-ID' addon/Snack_Bar/Snack_Bar.toc; then
+            echo "::notice::No X-Curse-Project-ID in Snack_Bar.toc, nothing to publish yet."
+            exit 0
+          fi
+          tagged=$(git rev-parse -q --verify "refs/tags/$version^{commit}" || true)
+          if [[ -n $tagged && $tagged != $(git rev-parse HEAD) ]]; then
+            if ! git diff --quiet "$tagged" HEAD -- addon; then
+              echo "::error::The addon differs from the published $version. Raise the version in Snack_Bar.toc."
+              exit 1
+            fi
+            echo "::notice::$version is already tagged, nothing to publish."
+            exit 0
+          fi
+          if [[ -z $CF_API_KEY ]]; then
+            echo "::error::The secret CF_API_KEY is missing. Add it, then run this again."
+            exit 1
+          fi
+          if [[ -z $tagged ]]; then
+            git tag "$version"
+            git push origin "refs/tags/$version"
+          fi
+          # A tag pushed with this token starts no workflow by itself.
+          gh workflow run publish.yml --ref "$version"

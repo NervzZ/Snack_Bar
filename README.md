@@ -31,13 +31,15 @@ Healthstones, mana gems and bandages are not included.
 
 ## Development
 
-`addon/Snack_Bar` is the addon folder. The item data in `Data.lua` is generated from the game client's tables:
+`addon/Snack_Bar` is the addon folder. The item data in `Data.lua` is generated from the game client's tables, which the script downloads:
 
     python tools/build_data.py 1.60.1.71037
 
-The offline tests need the tables downloaded by that script and `pip install lupa`:
+The offline tests need `pip install lupa`:
 
     python tools/test_snackbar.py
+
+Changes go to `main` by pull request. A pull request that changes the addon raises the version in `Snack_Bar.toc` and adds it to `CHANGELOG.md`. Merging it publishes that version.
 
 ## License
 
