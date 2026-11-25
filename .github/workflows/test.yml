@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - run: pip install lupa==2.8
+      - run: python tools/test_snackbar.py
+      - name: Version and changelog
+        run: |
+          version=$(bash tools/version.sh)
+          # HEAD is the merge of the pull request into main, HEAD^1 is main.
+          old=$(git show HEAD^1:addon/Snack_Bar/Snack_Bar.toc | tr -d '\r' | sed -n 's/^## Version:[[:space:]]*//p')
+          if [[ $(printf '%s\n' "$old" "$version" | sort -V | tail -n 1) != "$version" ]]; then
+            echo "::error::The version went down from $old to $version."
+            exit 1
+          fi
+          if ! git diff --quiet HEAD^1 HEAD -- addon && git rev-parse -q --verify "refs/tags/$version" > /dev/null; then
+            echo "::error::The addon changed, but $version is already published. Raise the version in Snack_Bar.toc."
+            exit 1
+          fi

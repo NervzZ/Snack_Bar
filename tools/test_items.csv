@@ -1,0 +1,362 @@
+id,name,class,level,price,spell
+117,Tough Jerky,0,1,1,433
+118,Minor Healing Potion,0,1,5,439
+159,Refreshing Spring Water,0,1,1,430
+414,Dalaran Sharp,0,5,6,434
+422,Dwarven Mild,0,15,25,435
+724,Goretusk Liver Pie,0,5,25,1248384
+733,Westfall Stew,0,5,100,1248687
+761,Deprecated Elwynn Trout,0,1,15,433
+787,Slitherskin Mackerel,0,1,1,1249503
+858,Lesser Healing Potion,0,3,25,440
+929,Healing Potion,0,12,75,441
+961,Healing Herb,0,0,2,433
+1017,Seasoned Wolf Kabob,0,15,100,1248387
+1082,Redridge Goulash,0,5,150,1248383
+1113,Conjured Bread,0,5,0,434
+1114,Conjured Rye,0,15,0,435
+1119,Bottled Spirits,0,0,50,435
+1179,Ice Cold Milk,0,5,6,431
+1205,Melon Juice,0,15,25,432
+1321,Deprecated Broiled Sunfish,0,0,52,434
+1326,Sauteed Sunfish,0,0,10,434
+1487,Conjured Pumpernickel,0,25,0,1127
+1645,Moonberry Juice,0,35,100,1135
+1707,Stormwind Brie,0,25,62,1127
+1708,Sweet Nectar,0,25,50,1133
+1710,Greater Healing Potion,0,21,125,2024
+2070,Darnassian Bleu,0,1,1,433
+2071,Deprecated Mountain Spring Water,0,1,2,430
+2136,Conjured Purified Water,0,15,0,432
+2287,Haunch of Meat,0,5,6,434
+2288,Conjured Fresh Water,0,5,0,431
+2455,Minor Mana Potion,0,5,10,437
+2456,Minor Rejuvenation Potion,0,5,15,2370
+2462,Deprecated Potion of Lesser Invulnerability (Fix),0,1,25,440
+2679,Charred Wolf Meat,0,1,5,433
+2680,Spiced Wolf Meat,0,1,10,1248378
+2681,Roasted Boar Meat,0,1,6,1248380
+2682,Cooked Crab Claw,0,1,25,1248379
+2683,Crab Cake,0,5,25,1248383
+2684,Coyote Steak,0,5,20,1248382
+2685,Succulent Pork Ribs,0,15,75,1248389
+2687,Dry Pork Ribs,0,5,25,1248384
+2888,Beer Basted Boar Ribs,0,1,10,1248380
+3087,Mug of Shimmer Stout,0,0,11,29236
+3220,Blood Sausage,0,5,40,1248384
+3385,Lesser Mana Potion,0,14,30,438
+3448,Senggin Root,0,0,6,2639
+3662,Crocolisk Steak,0,5,25,1248382
+3663,Murloc Fin Soup,0,1,125,1248377
+3664,Crocolisk Gumbo,0,15,100,1248387
+3665,Curiously Tasty Omelet,0,15,150,1248386
+3666,Gooey Spider Cake,0,15,100,1248386
+3726,Big Bear Steak,0,5,125,1248384
+3727,Hot Lion Chops,0,15,125,1248387
+3728,Tasty Lion Steak,0,25,300,1248391
+3729,Soothing Turtle Bisque,0,15,300,1248386
+3770,Mutton Chop,0,15,25,435
+3771,Wild Hog Shank,0,25,50,1127
+3772,Conjured Spring Water,0,25,0,1133
+3773,Deprecated Murkwood Sap,0,35,126,1135
+3827,Mana Potion,0,22,120,2023
+3927,Fine Aged Cheddar,0,35,150,1129
+3928,Superior Healing Potion,0,35,250,4042
+4418,Deprecated Creeper Cakes,0,35,130,1129
+4457,Barbecued Buzzard Wing,0,25,300,1248392
+4536,Shiny Red Apple,0,1,1,433
+4537,Tel'Abim Banana,0,5,6,434
+4538,Snapvine Watermelon,0,15,25,435
+4539,Goldenbark Apple,0,25,50,1127
+4540,Tough Hunk of Bread,0,1,1,433
+4541,Freshly Baked Bread,0,5,6,434
+4542,Moist Cornbread,0,15,25,435
+4544,Mulgore Spice Bread,0,25,50,1127
+4592,Longjaw Mud Snapper,0,5,1,1249506
+4593,Bristle Whisker Catfish,0,15,4,1249508
+4594,Rockscale Cod,0,25,6,1249511
+4596,Minor Discolored Healing Potion,0,5,25,1244863
+4599,Cured Ham Steak,0,35,100,1129
+4601,Soft Banana Bread,0,35,100,1129
+4602,Moon Harvest Pumpkin,0,35,100,1129
+4604,Forest Mushroom Cap,0,1,1,433
+4605,Red-speckled Mushroom,0,5,6,434
+4606,Spongy Morel,0,15,25,435
+4607,Delicious Cave Mold,0,25,50,1127
+4608,Raw Black Truffle,0,35,100,1129
+4656,Small Pumpkin,0,1,1,433
+4791,Enchanted Water,0,25,133,1133
+5057,Ripe Watermelon,0,1,1,433
+5066,Fissure Plant,0,5,21,434
+5095,Rainbow Fin Albacore,0,5,3,1249501
+5349,Conjured Muffin,0,1,0,433
+5350,Conjured Water,0,1,0,430
+5472,Kaldorei Spider Kabob,0,1,10,1248377
+5473,Scorpid Surprise,0,1,10,6410
+5474,Roasted Kodo Meat,0,1,9,1248377
+5476,Fillet of Frenzy,0,5,3,1249505
+5477,Strider Stew,0,1,18,1248379
+5478,Dig Rat Stew,0,15,70,435
+5479,Crispy Lizard Tail,0,5,125,1248381
+5480,Lean Venison,0,15,95,1248389
+5512,Minor Healthstone,0,1,0,6262
+5525,Boiled Clams,0,1,20,433
+5526,Clam Chowder,0,5,75,434
+5527,Goblin Deviled Clams,0,15,95,5006
+5845,Flank of Meat,0,15,0,435
+6038,Giant Clam Scorcho,0,25,312,1248390
+6149,Greater Mana Potion,0,31,120,11903
+6290,Brilliant Smallfish,0,1,1,1249500
+6299,Sickly Looking Fish,0,1,1,7737
+6316,Loch Frenzy Delight,0,5,3,1249502
+6458,Oil Covered Fish,0,5,1,433
+6807,Frog Leg Stew,0,0,62,1127
+6887,Spotted Yellowtail,0,35,5,1249513
+6888,Herb Baked Egg,0,1,10,1248377
+6890,Smoked Bear Meat,0,1,6,1248380
+6948,Hearthstone,15,0,0,8690
+7097,Leg Meat,0,1,1,433
+7228,Tigule's Strawberry Ice Cream,0,15,25,435
+7737,Sethir's Journal,12,1,0,
+7806,Lollipop,0,1,10,5004
+7807,Candy Bar,0,1,10,5004
+7808,Chocolate Square,0,1,10,5004
+8075,Conjured Sourdough,0,35,0,1129
+8076,Conjured Sweet Roll,0,45,0,1131
+8077,Conjured Mineral Water,0,35,0,1135
+8078,Conjured Sparkling Water,0,45,0,1137
+8079,Conjured Crystal Water,0,55,0,22734
+8364,Mithril Head Trout,0,25,6,1249509
+8543,Underwater Mushroom Cap,0,25,300,1127
+8766,Morning Glory Dew,0,45,200,1137
+8932,Alterac Swiss,0,45,200,1131
+8948,Dried King Bolete,0,45,200,1131
+8950,Homemade Cherry Pie,0,45,200,1131
+8952,Roasted Quail,0,45,200,1131
+8953,Deep Fried Plantains,0,45,200,1131
+8957,Spinefin Halibut,0,45,200,1249514
+9144,Wildvine Potion,0,35,250,11387
+9451,Bubbling Water,0,15,25,432
+9681,Grilled King Crawler Legs,0,35,50,1129
+10841,Goldthorn Tea,0,25,85,1249906
+11109,Special Chicken Feed,0,1,6,7737
+11415,Mixed Berries,0,45,200,1131
+11444,Grim Guzzler Boar,0,45,200,1131
+11584,Cactus Apple Surprise,0,0,1,5004
+11950,Windblossom Berries,0,45,0,26030
+12209,Lean Wolf Steak,0,15,95,1248387
+12210,Roast Raptor,0,15,300,1248388
+12212,Jungle Stew,0,35,300,1248395
+12213,Carrion Surprise,0,5,300,1248381
+12214,Mystery Stew,0,15,300,1248386
+12215,Heavy Kodo Stew,0,25,300,1248390
+12216,Spiced Chili Crab,0,25,300,1248392
+12218,Monster Omelet,0,35,300,1248394
+12224,Crispy Bat Wing,0,1,10,1248379
+12238,Darkshore Grouper,0,5,2,434
+12763,Un'Goro Etherfruit,0,45,200,1131
+13443,Superior Mana Potion,0,41,400,17530
+13444,Major Mana Potion,0,49,1500,17531
+13446,Major Healing Potion,0,45,1000,17534
+13546,Bloodbelly Fish,0,25,62,1129
+13724,Enriched Manna Biscuit,0,45,300,1226814
+13755,Raw Winter Squid,0,35,7,1127
+13810,Blessed Sunfruit,0,45,300,18124
+13813,Blessed Sunfruit Juice,0,45,300,18140
+13851,Hot Wolf Ribs,0,25,312,1248391
+13893,Large Raw Mightfish,0,45,15,1129
+13927,Cooked Glossy Mightfish,0,35,8,1249512
+13928,Grilled Squid,0,35,8,1249522
+13929,Hot Smoked Bass,0,35,10,1249522
+13930,Filet of Redgill,0,35,5,1249514
+13931,Nightfin Soup,0,35,12,1249513
+13932,Poached Sunscale Salmon,0,35,12,1249515
+13933,Lobster Stew,0,45,14,1249516
+13934,Mightfish Steak,0,45,18,1249515
+13935,Baked Salmon,0,45,10,1249516
+16166,Bean Soup,0,1,1,433
+16167,Versicolor Treat,0,5,6,434
+16168,Heaven Peach,0,35,100,1129
+16169,Wild Ricecake,0,25,62,1127
+16170,Steamed Mandu,0,15,25,435
+16171,Shinsollo,0,45,200,1131
+16766,Undermine Clam Chowder,0,35,100,1129
+16971,Clamlette Surprise,0,40,300,10256
+17119,Deeprun Rat Kabob,0,5,6,434
+17197,Gingerbread Cookie,0,1,10,5004
+17198,Egg Nog,0,1,9,21149
+17222,Spider Sausage,0,35,300,1248394
+17344,Candy Cane,0,1,1,433
+17348,Major Healing Draught,0,45,250,21393
+17349,Superior Healing Draught,0,35,125,21394
+17351,Major Mana Draught,0,45,250,21395
+17352,Superior Mana Draught,0,35,125,21396
+17404,Blended Bean Brew,0,5,6,431
+17406,Holiday Cheesewheel,0,5,6,434
+17407,Graccu's Homemade Meat Pie,0,25,50,1127
+17408,Spicy Beefstick,0,35,100,1129
+18045,Tender Wolf Steak,0,35,300,1248395
+18253,Major Rejuvenation Potion,0,50,15,22729
+18254,Runn Tum Tuber Surprise,0,35,18,1248396
+18255,Runn Tum Tuber,0,45,15,1129
+18300,Hyjal Nectar,0,55,200,22734
+18632,Moonbrook Riot Taffy,0,25,50,1127
+18633,Styleen's Sour Suckerpop,0,5,6,434
+18635,Bellara's Nutterbar,0,35,100,1129
+18839,Combat Healing Potion,0,35,250,4042
+18841,Combat Mana Potion,0,41,275,17530
+19060,Warsong Gulch Enriched Ration,0,45,100,23540
+19061,Warsong Gulch Iron Ration,0,35,75,23541
+19062,Warsong Gulch Field Ration,0,25,50,23542
+19223,Darkmoon Dog,0,1,1,433
+19224,Red Hot Wings,0,25,50,1127
+19225,Deep Fried Candybar,0,45,200,1131
+19299,Fizzy Faire Drink,0,15,25,432
+19300,Bottled Winterspring Water,0,35,100,1135
+19301,Alterac Manna Biscuit,0,51,350,23692
+19304,Spiced Beef Jerky,0,5,6,434
+19305,Pickled Kodo Foot,0,15,25,435
+19306,Crunchy Frog,0,35,100,1129
+19318,Bottled Alterac Spring Water,0,55,250,23698
+19696,Harvest Bread,0,0,0,24005
+19994,Harvest Fruit,0,0,0,24005
+19995,Harvest Boar,0,0,0,24005
+19996,Harvest Fish,0,0,0,24005
+19997,Harvest Nectar,0,0,0,24355
+20031,Essence Mango,0,55,0,24384
+20062,Arathi Basin Enriched Ration,0,45,100,24411
+20063,Arathi Basin Field Ration,0,25,50,24409
+20064,Arathi Basin Iron Ration,0,35,75,24410
+20074,Heavy Crocolisk Stew,0,25,300,1248391
+20222,Defiler's Enriched Ration,0,45,100,24411
+20223,Defiler's Field Ration,0,25,50,24409
+20224,Defiler's Iron Ration,0,35,75,24410
+20225,Highlander's Enriched Ration,0,45,100,24411
+20226,Highlander's Field Ration,0,25,50,24409
+20227,Highlander's Iron Ration,0,35,75,24410
+20388,Lollipop,0,0,0,24707
+20389,Candy Corn,0,0,0,24707
+20390,Candy Bar,0,0,0,24707
+20452,Smoked Desert Dumplings,0,45,250,1248401
+20516,Bobbing Apple,0,0,0,24869
+21023,Dirge's Kickin' Chimaerok Chops,0,45,250,25660
+21030,Darnassus Kimchi Pie,0,35,100,1129
+21031,Cabbage Kimchi,0,45,200,1131
+21033,Radish Kimchi,0,45,200,1131
+21072,Smoked Sagefish,0,10,40,1249504
+21215,Graccu's Mince Meat Fruitcake,0,40,0,25990
+21217,Sagefish Delight,0,30,125,1249507
+21235,Winter Veil Roast,0,0,0,24005
+21236,UNUSED ITEM,0,0,0,24005
+21238,UNUSED ITEM,0,0,0,24005
+21240,UNUSED ITEM,0,0,0,24005
+21241,Winter Veil Eggnog,0,0,0,24355
+21254,Winter Veil Cookie,0,0,0,24869
+21537,Festival Dumplings,0,0,0,26263
+21552,Striped Yellowtail,0,35,5,1129
+22324,Winter Kimchi,0,45,200,1131
+22895,Conjured Cinnamon Roll,0,55,0,29073
+23160,Friendship Bread,0,45,200,29008
+23161,Freshly-Squeezed Lemonade,0,45,200,29007
+23172,Refreshing Red Apple,0,0,0,29055
+23175,Tasty Summer Treat,0,0,0,29041
+23578,Diet McWeaksauce,0,49,0,17531
+23579,The McWeaksauce Classic,0,45,0,17534
+206177,Pine Nut Butter,0,1,10,5004
+231778,Mountain Spring Water,0,55,0,468767
+232436,Darkclaw Bisque,0,45,100,470362
+232438,Smoked Redgill,0,35,5,470369
+238637,Prowler Steak,0,55,250,1225769
+238638,Filet o' Flank,0,55,250,1225771
+238639,Sunrise Omelette,0,55,250,1225772
+241650,Major Discolored Healing Potion,0,60,25,1231578
+247239,Lesser Discolored Healing Potion,0,3,25,1244864
+247240,Discolored Healing Potion,0,12,75,1244865
+247241,Greater Discolored Healing Potion,0,21,125,1244866
+247242,Superior Discolored Healing Potion,0,35,250,1244867
+248613,Lightning in a Bottle,0,15,25,435
+249796,Hyjal Berries,0,45,150,1129
+249865,Peace Tea,0,1,1,1249920
+249866,Royal Tea,0,5,1,1249921
+249867,Root Tea,0,15,1,1249922
+249868,Triage Tea,0,25,1,1249923
+249869,Sunny Tea,0,35,1,1249924
+249870,Sage's Tea,0,45,1,1249925
+249871,Venomous Smoothie,0,1,1,1249914
+249872,Slimy Smoothie,0,5,1,1249915
+249873,Mrrggl Smrrthle,0,15,1,1249916
+249874,Calcified Smoothie,0,25,1,1249917
+249875,Spicy Smoothie,0,35,1,1249918
+249876,Wicked Smoothie,0,45,1,1249919
+250065,Savory Stag Sliders,0,35,150,1248397
+250066,Soaring Pamplona,0,45,5,1248400
+250067,Bat Hachee,0,45,10,1248400
+250068,Savory Turtle Stew,0,45,6,1248398
+250069,Flank au Poivre,0,45,25,1248399
+250070,Bear Bruscitti,0,45,25,1248401
+250071,Steaming Stag Steak,0,45,10,1248401
+250072,Swiftstrike Steak,0,45,40,1248399
+250073,Raging Raptor Ribs,0,25,125,1248392
+250074,Bear Brisket,0,25,125,1248393
+250075,Prehistoric Pulled Raptor,0,45,10,1248400
+250076,Raptor Rouladen,0,35,10,1248396
+250077,Twice-Spiced Raptor Slice,0,5,9,1248383
+250078,Giant Scrambled Eggs,0,25,18,1248390
+250079,Tasty Raptor Bites,0,1,10,1248379
+250080,Breakfast Omelette,0,5,6,1248381
+250081,Clam Linguine,0,45,10,1131
+251917,Falorne's Homemade Tart,0,1,1,433
+252022,Galestrider Jerky,0,1,1,433
+252023,Zaalanarr Sharp,0,1,1,433
+252026,Gustberry Pie,0,5,6,434
+252027,Gustberry Juice,0,5,5,431
+252028,Fresh Gustberry Bread,0,1,1,433
+252029,Hippogryph Flank,0,5,30,434
+252030,Pungent Skycheddar,0,5,6,434
+252031,Crisp Spring Water,0,1,1,430
+252032,Red Delicious Stormapple,0,5,30,434
+255663,Windstone,0,0,4,1259231
+260623,Candied Fruit Sampler,0,25,62,1127
+260624,Pristine Peach,0,35,100,1129
+260625,Garnished Rice Cake,0,35,100,1129
+260627,Savory Shen'dralar Steak,0,45,200,1131
+260628,Stuffed Pumpkin,0,45,200,1131
+262433,Ketharas' Hyjal Stew,0,0,200,1269354
+263509,Skywall Souffle,0,5,100,1248377
+263512,Pincer Bites,0,5,100,1248379
+267341,Sweetpaw Jam,0,55,200,1294006
+267474,Galeswept Forestshroom,0,1,1,433
+268881,Perishable Minor Healing Potion,0,1,0,439
+268882,Perishable Lesser Healing Potion,0,3,0,440
+268883,Perishable Healing Potion,0,12,0,441
+268912,Expiring Crab Cake,0,5,0,1248381
+268913,Expiring Crocolisk Steak,0,5,0,1248381
+272053,Darkspear Islands Field Ration,0,25,50,1290860
+272054,Darkspear Islands Iron Ration,0,35,75,1290859
+272055,Darkspear Islands Enriched Ration,0,45,100,1290861
+274935,Tessa's Tonic,0,35,150,1295688
+274971,Briny Seafood Stew,0,25,12,1249510
+274976,Plain Ol' Paletusk,0,25,75,1248393
+278117,Hard Boiled Eggs,0,5,6,434
+278118,Rich Broth,0,25,62,1127
+278119,Bread with Butter,0,1,1,433
+278120,Fruit Platter,0,25,50,1127
+278121,Smoked Sausage,0,15,25,435
+278122,Carrot Salad,0,45,200,1131
+278265,Nutritious Slime Sludge,0,1,1,7737
+278569,Yesterday's Leftovers,0,1,1,433
+282011,Restored Healing Potion,0,1,1,1312698
+282013,Restored Mana Potion,0,1,1,1312702
+282018,Restorative Bread,0,1,1,1312719
+286152,Plated Armorfish,0,35,8,1319311
+287963,Roasted Quail,0,1,200,1131
+287964,Morning Glory Dew,0,1,200,1330734
+287966,Minor Healing Potion,0,1,5,439
+287967,Lesser Healing Potion,0,1,25,440
+287968,Minor Mana Potion,0,1,10,437
+287969,Lesser Mana Potion,0,1,30,438
+287973,Tender Wolf Steak,0,1,300,1248395
+287974,Grilled Squid,0,1,8,1249522
+287977,Greater Healing Potion,0,1,125,2024
+288896,Superior Healing Potion,0,1,250,4042
+288897,Superior Mana Potion,0,1,400,17530

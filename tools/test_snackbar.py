@@ -1,4 +1,4 @@
-"""Offline test of the addon: real Lua 5.1 (lupa), a strict WoW mock and the real item tables.
+"""Offline test of the addon: real Lua 5.1 (lupa), a strict WoW mock and real items.
 
 Usage: python tools/test_snackbar.py [addon folder]     (needs: pip install lupa)
 """
@@ -10,18 +10,12 @@ from lupa import lua51
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ADDON = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "addon" / "Snack_Bar"
-CACHE = sorted((ROOT / "tools" / "cache").iterdir())[-1]
 
-
-def rows(table):
-    with open(CACHE / f"{table}.csv", encoding="utf-8", newline="") as f:
-        yield from csv.DictReader(f)
-
-
-USE = {int(r["ID"]): int(r["SpellID"]) for r in rows("ItemEffect") if r["TriggerType"] == "0"}
-SPELL = {int(r["ItemID"]): USE[int(r["ItemEffectID"])] for r in rows("ItemXItemEffect") if int(r["ItemEffectID"]) in USE}
-CLASS = {int(r["ID"]): int(r["ClassID"]) for r in rows("Item")}
-ITEMS = {int(r["ID"]): (r["Display_lang"], int(r["RequiredLevel"]), int(r["SellPrice"])) for r in rows("ItemSparse")}
+with open(ROOT / "tools" / "test_items.csv", encoding="utf-8", newline="") as f:
+    ROWS = list(csv.DictReader(f))
+SPELL = {int(r["id"]): int(r["spell"]) for r in ROWS if r["spell"]}
+CLASS = {int(r["id"]): int(r["class"]) for r in ROWS}
+ITEMS = {int(r["id"]): (r["name"], int(r["level"]), int(r["price"])) for r in ROWS}
 
 MOCK = r"""
 W = { combat = false, level = 10, bags = {}, unloaded = {}, instance = "none", map = 0, timers = {}, printed = {}, frames = {}, cooldown = {}, requested = {} }
