@@ -2,6 +2,7 @@
 -- [spellID] = total amount restored per kind (Pct = percent of the maximum).
 -- last = buff, side effect or combined potion: used only when nothing plain is available.
 -- map / pvp = usable only on that map / in battlegrounds.
+-- stone = healthstone: a health potion only when the option is on; it has its own cooldown.
 local _, ns = ...
 
 ns.SPELLS = {
@@ -29,10 +30,15 @@ ns.SPELLS = {
 	[4042] = { health = 800 }, -- Healing Potion: Superior Healing Potion +2
 	[5004] = { food = 61, last = true }, -- Food: Pine Nut Butter +5
 	[5006] = { food = 552, last = true }, -- Food: Goblin Deviled Clams
+	[5720] = { health = 600, stone = true }, -- Healthstone: Healthstone
+	[5723] = { health = 960, stone = true }, -- Greater Healthstone: Greater Healthstone
+	[6262] = { health = 120, stone = true }, -- Minor Healthstone: Minor Healthstone
+	[6263] = { health = 300, stone = true }, -- Lesser Healthstone: Lesser Healthstone
 	[6410] = { food = 294, last = true }, -- Food: Scorpid Surprise
 	[7737] = { food = 30 }, -- Food: Sickly Looking Fish +2
 	[10256] = { food = 1392, last = true }, -- Food: Clamlette Surprise
 	[11387] = { health = 750, mana = 750, last = true }, -- Wildvine Potion: Wildvine Potion
+	[11732] = { health = 1440, stone = true }, -- Major Healthstone: Major Healthstone
 	[11903] = { mana = 800 }, -- Restore Mana: Greater Mana Potion
 	[17530] = { mana = 1200 }, -- Restore Mana: Combat Mana Potion +2
 	[17531] = { mana = 1800 }, -- Restore Mana: Major Mana Potion +1
@@ -46,6 +52,16 @@ ns.SPELLS = {
 	[21396] = { mana = 640, pvp = true }, -- Restore Mana: Superior Mana Draught
 	[22729] = { health = 1600, mana = 1600, last = true }, -- Rejuvenation Potion: Major Rejuvenation Potion
 	[22734] = { water = 4200 }, -- Drink: Conjured Crystal Water +1
+	[23468] = { health = 110, stone = true }, -- Minor Healthstone: Minor Healthstone
+	[23469] = { health = 120, stone = true }, -- Minor Healthstone: Minor Healthstone
+	[23470] = { health = 275, stone = true }, -- Lesser Healthstone: Lesser Healthstone
+	[23471] = { health = 300, stone = true }, -- Lesser Healthstone: Lesser Healthstone
+	[23472] = { health = 550, stone = true }, -- Healthstone: Healthstone
+	[23473] = { health = 600, stone = true }, -- Healthstone: Healthstone
+	[23474] = { health = 880, stone = true }, -- Greater Healthstone: Greater Healthstone
+	[23475] = { health = 960, stone = true }, -- Greater Healthstone: Greater Healthstone
+	[23476] = { health = 1320, stone = true }, -- Major Healthstone: Major Healthstone
+	[23477] = { health = 1440, stone = true }, -- Major Healthstone: Major Healthstone
 	[23540] = { food = 2148, water = 4410, map = 489 }, -- Warsong Gulch Enriched Ration: Warsong Gulch Enriched Ration
 	[23541] = { food = 1608, water = 3306, map = 489 }, -- Warsong Gulch Iron Ration: Warsong Gulch Iron Ration
 	[23542] = { food = 1074, water = 2202, map = 489 }, -- Warsong Gulch Field Ration: Warsong Gulch Field Ration

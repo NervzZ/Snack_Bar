@@ -13,6 +13,7 @@ local DEFAULTS = {
 	attach = false, -- potions on the food and water bar: "horizontal" (beside) or "vertical" (below)
 	hover = false, -- bars are only visible while the mouse is near
 	locked = false, -- no lips, so bars cannot be dragged
+	healthstones = false, -- healthstones count as health potions
 	bars = {
 		main = { enabled = true, vertical = false, x = -42, y = -160, slots = { food = true, water = true } },
 		potion = { enabled = false, vertical = false, x = -42, y = -220, slots = { health = true, mana = true } },
@@ -105,13 +106,22 @@ end
 
 local levelReached = 0
 
--- Returns, per kind, the usable items in the bags, best first.
+-- The time an item's cooldown ends, or nil when it is ready.
+local function GetCooldownEnd(itemID)
+	local start, duration = C_Item.GetItemCooldown(itemID)
+	if start and start > 0 and duration > 0 and start + duration > GetTime() then
+		return start + duration
+	end
+end
+
+-- Returns, per kind, the usable items in the bags, best first, and the time the first
+-- healthstone that waits for its cooldown is ready.
 function ns.Scan()
 	UpdateMaximums()
 	local level = math.max(UnitLevel("player"), levelReached)
 	local _, instanceType, _, _, _, _, _, mapID = GetInstanceInfo()
 	local lists = { food = {}, water = {}, health = {}, mana = {} }
-	local seen = {}
+	local seen, stoneReady = {}, nil
 	for bag = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
 		for bagSlot = 1, C_Container.GetContainerNumSlots(bag) do
 			local itemID = C_Container.GetContainerItemID(bag, bagSlot)
@@ -119,6 +129,19 @@ function ns.Scan()
 				seen[itemID] = true
 				local snack = GetSnack(itemID)
 				local data = snack and snack.data
+				-- Healthstones count only with the option. One on cooldown waits outside the list: the slot
+				-- keeps its item for a whole fight, and a stone it cannot use would block the potions.
+				if data and data.stone then
+					if not ns.db.healthstones then
+						data = nil
+					else
+						local ready = GetCooldownEnd(itemID)
+						if ready then
+							stoneReady = math.min(stoneReady or ready, ready)
+							data = nil
+						end
+					end
+				end
 				if data and snack.minLevel <= level
 					and (not data.pvp or instanceType == "pvp")
 					and (not data.map or data.map == mapID) then
@@ -131,6 +154,7 @@ function ns.Scan()
 								price = snack.price,
 								count = C_Item.GetItemCount(itemID),
 								last = data.last or false,
+								stone = data.stone or false,
 							}
 						end
 					end
@@ -141,7 +165,7 @@ function ns.Scan()
 	for _, list in pairs(lists) do
 		table.sort(list, IsBetter)
 	end
-	return lists
+	return lists, stoneReady
 end
 
 -- Refreshing ----------------------------------------------------------------
@@ -149,6 +173,20 @@ end
 local started = false
 local refreshQueued = false
 local refreshAfterCombat = false
+local wakeAt -- time of the pending scan for a healthstone that comes off cooldown
+
+local function RefreshAt(time)
+	if wakeAt and wakeAt <= time then
+		return
+	end
+	wakeAt = time
+	C_Timer.After(time - GetTime(), function()
+		if wakeAt == time then
+			wakeAt = nil
+			ns.Refresh()
+		end
+	end)
+end
 
 function ns.Refresh()
 	if not started then
@@ -159,7 +197,11 @@ function ns.Refresh()
 		refreshAfterCombat = true
 	else
 		refreshAfterCombat = false
-		ns.ApplyLists(ns.Scan())
+		local lists, stoneReady = ns.Scan()
+		ns.ApplyLists(lists)
+		if stoneReady then
+			RefreshAt(stoneReady)
+		end
 	end
 	ns.UpdateDisplay()
 end

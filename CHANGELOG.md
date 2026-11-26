@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Option to count healthstones as health potions, ranked with them by how much they heal
+- A click never uses a healthstone and a potion together, and a healthstone on cooldown waits until it is ready
+
 ## 1.0.0
 
 First public version.
