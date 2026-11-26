@@ -17,13 +17,16 @@ import urllib.request
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 OUT = ROOT / "addon" / "Snack_Bar" / "Data.lua"
 TEST_ITEMS = ROOT / "tools" / "test_items.csv"
-OTHER_TEST_ITEMS = [5512, 6948, 7737]  # no food or potions: Minor Healthstone, Hearthstone, Sethir's Journal
+# Not in the table: Hearthstone, Sethir's Journal, Mana Agate and Whipper Root Tuber (on the healthstone cooldown).
+OTHER_TEST_ITEMS = [6948, 7737, 5514, 11951]
 TABLES = ["Item", "ItemSparse", "ItemEffect", "ItemXItemEffect", "SpellName", "SpellEffect", "Spell",
           "SpellMisc", "SpellDuration", "SpellCastingRequirements", "AreaGroupMember", "AreaTable"]
 
 CONSUMABLE = "0"
 SUB_POTION, SUB_FOOD = "1", "5"
 CAT_POTION, CAT_FOOD, CAT_DRINK = "4", "11", "59"
+# Mana gems, runes and a few herbs share this cooldown too; the healthstones are its unique plain heals.
+CAT_HEALTHSTONE = "1153"
 # Effects and auras.
 E_HEAL, E_AURA, E_ENERGIZE, E_TRIGGER, E_HEAL_PCT, E_ENERGIZE_PCT = 10, 6, 30, 64, 136, 137
 A_HEALTH, A_MANA, A_HEALTH_PCT, A_MANA_PCT, A_PERIODIC_DUMMY = 84, 85, 20, 21, 226
@@ -108,6 +111,7 @@ def build(data):
     spells = Spells(data)
     items = {int(row["ID"]): row for row in data["Item"]}
     names = {int(row["ID"]): row["Display_lang"] for row in data["ItemSparse"]}
+    unique = {int(row["ID"]) for row in data["ItemSparse"] if row["MaxCount"] == "1"}
     effects = {int(row["ID"]): row for row in data["ItemEffect"]}
     entries, users, snacks = {}, collections.defaultdict(list), set()
     for link in data["ItemXItemEffect"]:
@@ -133,6 +137,10 @@ def build(data):
                     entry[source] = instant[source]
             both = any(k.startswith("health") for k in entry) and any(k.startswith("mana") for k in entry)
             entry["last"] = bool(side_effect or both)
+        elif (category == CAT_HEALTHSTONE and item_id in unique and not over_time and not side_effect
+              and +instant and set(+instant) <= {"health", "healthPct"}):
+            entry = {source: instant[source] for source in ("health", "healthPct") if instant[source] > 0}
+            entry["stone"] = True
         if not any(key != "last" for key in entry):
             continue
         assert spell not in spells.scaling, f"spell {spell} scales with level"
@@ -167,7 +175,7 @@ def lua(entry):
     for key in ("food", "water", "foodPct", "waterPct", "health", "mana", "healthPct", "manaPct", "map"):
         if entry.get(key):
             parts.append(f"{key} = {round(entry[key])}")
-    parts += [f"{key} = true" for key in ("last", "pvp") if entry.get(key)]
+    parts += [f"{key} = true" for key in ("last", "pvp", "stone") if entry.get(key)]
     return "{ " + ", ".join(parts) + " }"
 
 
@@ -178,6 +186,7 @@ def main(build_id):
              "-- [spellID] = total amount restored per kind (Pct = percent of the maximum).",
              "-- last = buff, side effect or combined potion: used only when nothing plain is available.",
              "-- map / pvp = usable only on that map / in battlegrounds.",
+             "-- stone = healthstone: a health potion only when the option is on; it has its own cooldown.",
              "local _, ns = ...", "", "ns.SPELLS = {"]
     for spell in sorted(entries):
         extra = len(users[spell]) - 1

@@ -18,7 +18,7 @@ CLASS = {int(r["id"]): int(r["class"]) for r in ROWS}
 ITEMS = {int(r["id"]): (r["name"], int(r["level"]), int(r["price"])) for r in ROWS}
 
 MOCK = r"""
-W = { combat = false, level = 10, bags = {}, unloaded = {}, instance = "none", map = 0, timers = {}, printed = {}, frames = {}, cooldown = {}, requested = {} }
+W = { combat = false, level = 10, bags = {}, unloaded = {}, instance = "none", map = 0, timers = {}, printed = {}, frames = {}, cooldown = {}, requested = {}, now = 0 }
 local function protect(self, what)
 	if W.combat and self.protected then error("PROTECTED in combat: " .. what, 3) end
 end
@@ -129,7 +129,9 @@ function UnitPowerMax() return 1000 end
 function issecretvalue() return false end
 function GetInstanceInfo() return "x", W.instance, 0, "", 0, 0, false, W.map end
 function print(text) W.printed[#W.printed + 1] = text end
-C_Timer = { After = function(_, f) W.timers[#W.timers + 1] = f end }
+function GetTime() return W.now end
+-- Timers run at the next event, whatever their delay; the last delay is kept for the tests.
+C_Timer = { After = function(delay, f) W.timers[#W.timers + 1] = f; W.delay = delay end }
 C_Container = {
 	GetContainerNumSlots = function(bag) return bag == 0 and #W.bags or 0 end,
 	GetContainerItemID = function(_, slot) return W.bags[slot] and W.bags[slot][1] end,
@@ -240,6 +242,7 @@ JERKY, BREAD, CONJURED_BREAD, CRAB_CLAW, QUAIL = 117, 4541, 1113, 2682, 8952
 SPRING_WATER, MILK, PEACE_TEA = 159, 1179, 249865
 MINOR_HP, LESSER_HP, HP, MINOR_MP, MAJOR_REJUV, SUP_DRAUGHT = 118, 858, 929, 2455, 18253, 17349
 MANNA_BISCUIT, AB_RATION, HARVEST_BREAD, HEARTHSTONE, HEALTHSTONE = 19301, 20062, 19696, 6948, 5512
+MAJOR_HP, SUPERIOR_HP, MAJOR_STONE, GREATER_STONE, WHIPPER_ROOT, MANA_AGATE = 13446, 3928, 9421, 5510, 11951, 5514
 
 tests = []
 
@@ -314,12 +317,82 @@ def zone_limits():
 def potions():
     g = Game(level=60)
     g.bags((MAJOR_REJUV, 3), (MINOR_HP, 1), (HP, 6), (HEALTHSTONE, 1))
-    equal(g.picked("health"), HP, "combined potion is last, healthstones are not potions")
+    equal(g.picked("health"), HP, "combined potion is last, healthstones only with the option")
     equal(g.picked("mana"), MAJOR_REJUV, "last resort")
     equal(g.slot("health").attr["*type1"], "item", "6 of the best need no backup")
     g.bags((HP, 2), (LESSER_HP, 2), (MINOR_HP, 9), (MAJOR_REJUV, 1))
     equal(g.slot("health").attr["*type1"], "macro")
     equal(g.slot("health").attr["macrotext"], f"/use item:{HP}\n/use item:{LESSER_HP}\n/use item:{MINOR_HP}")
+
+
+@test
+def healthstones():
+    g = Game(saved="{ bars = { potion = { enabled = true } } }", level=60)
+    health = g.slot("health")
+    g.bags((MAJOR_HP, 9), (MAJOR_STONE, 1), (WHIPPER_ROOT, 5), (MANA_AGATE, 1))
+    equal((g.settings.healthstones, g.picked("health")), (False, MAJOR_HP), "off by default")
+    g.slash()
+    g.click("Healthstones as health potions", checked=True)
+    equal(g.picked("health"), MAJOR_STONE, "1440 beats 1400")
+    equal((health.attr["*type1"], health.attr["item"]), ("item", f"item:{MAJOR_STONE}"), "no potion behind it")
+    g.bags((MAJOR_HP, 2), (GREATER_STONE, 1), (SUPERIOR_HP, 9))
+    equal(g.picked("health"), MAJOR_HP, "960 loses to 1400")
+    equal(health.attr["macrotext"], f"/use item:{MAJOR_HP}\n/use item:{SUPERIOR_HP}", "potion backups skip the stone")
+    g.bags((GREATER_STONE, 1), (MAJOR_HP, 9), (MAJOR_STONE, 1))
+    equal(health.attr["macrotext"], f"/use item:{MAJOR_STONE}\n/use item:{GREATER_STONE}", "stones back up stones")
+    g.bags((WHIPPER_ROOT, 5), (MANA_AGATE, 1))
+    equal(g.picked("health"), None, "same cooldown, but no healthstones")
+    g.w.level = 40
+    g.bags((MAJOR_STONE, 1), (GREATER_STONE, 1))
+    equal(g.picked("health"), GREATER_STONE, "required level")
+    stones = list(g.control("Healthstones as health potions"))[0]
+    g.click("Health potions", checked=False)
+    equal((stones.checked, stones.enabledState), (True, False), "needs the health slot")
+    g.click("Health potions", checked=True)
+    g.click("Show potions", checked=False)
+    equal(stones.enabledState, False, "needs the potions")
+    g.click("Show potions", checked=True)
+    g.click("Healthstones as health potions", checked=False)
+    g.bags((GREATER_STONE, 1), (SUPERIOR_HP, 1))
+    equal(g.picked("health"), SUPERIOR_HP, "off again")
+
+
+@test
+def healthstone_in_combat():
+    g = Game(saved="{ healthstones = true, bars = { potion = { enabled = true } } }", level=60)
+    g.bags((MAJOR_STONE, 1), (MAJOR_HP, 9))
+    g.fire("PLAYER_REGEN_DISABLED")
+    g.w.combat = True
+    g.bags((MAJOR_HP, 9))
+    health = g.slot("health")
+    equal((health.itemID, health.count.text_, health.icon.desaturated), (MAJOR_STONE, "0", True), "used up, no potion on that click")
+    g.w.combat = False
+    g.fire("PLAYER_REGEN_ENABLED")
+    equal((g.picked("health"), health.attr["item"]), (MAJOR_HP, f"item:{MAJOR_HP}"), "potions after the fight")
+
+
+@test
+def healthstone_on_cooldown():
+    g = Game(saved="{ healthstones = true, bars = { potion = { enabled = true } } }", level=60)
+    g.w.now = 1000
+    g.w.cooldown[MAJOR_STONE] = g.lua.table(950, 120)
+    g.bags((MAJOR_STONE, 1), (MAJOR_HP, 9))
+    equal((g.picked("health"), g.w.delay), (MAJOR_HP, 70), "a fresh stone waits for its cooldown")
+    g.ns.Refresh()
+    g.ns.Refresh()
+    equal(len(list(g.w.timers.values())), 1, "one scan is enough")
+    g.w.now = 1030
+    g.fire("BAG_UPDATE_COOLDOWN")
+    equal((g.picked("health"), g.w.delay), (MAJOR_HP, 40), "too early: waits again")
+    g.w.now = 1070
+    g.w.combat = True
+    g.fire("BAG_UPDATE_COOLDOWN")
+    equal(g.picked("health"), MAJOR_HP, "ready in combat: the button cannot change")
+    g.w.combat = False
+    g.fire("PLAYER_REGEN_ENABLED")
+    equal(g.picked("health"), MAJOR_STONE, "after the fight")
+    g.ns.Refresh()
+    equal(len(list(g.w.timers.values())), 0, "nothing left to wait for")
 
 
 @test

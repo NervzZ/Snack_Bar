@@ -30,7 +30,7 @@ local function CreateSlot(bar, kind)
 	slot.home = bar
 	slot.isPotion = kind == "health" or kind == "mana"
 	slot.list = {}
-	slot.active = 0
+	slot.chain = {}
 	slot:RegisterForClicks("AnyUp", "AnyDown")
 	slot:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
 	slot:SetPushedTexture("Interface\\Buttons\\UI-Quickslot-Depress")
@@ -60,27 +60,41 @@ local function CreateSlot(bar, kind)
 	return slot
 end
 
-local function SetAction(slot)
+-- The items the button uses, best first. A potion slot adds backups that share the cooldown of
+-- the best item: a healthstone has its own, so one click would use it and a potion.
+local function GetChain(slot)
 	local best = slot.list[1]
-	if not best then
-		slot.active = 0
-		slot:SetAttribute("*type1", nil)
-	elseif slot.isPotion and slot.list[2] and best.count < BACKUP_COUNT then
-		local lines, total = {}, 0
-		for index, entry in ipairs(slot.list) do
-			lines[index] = "/use item:" .. entry.itemID
-			total = total + entry.count
-			if total >= BACKUP_COUNT or index == BACKUP_LINES then
+	local chain = { best }
+	if best and slot.isPotion then
+		local total = best.count
+		for index = 2, #slot.list do
+			if total >= BACKUP_COUNT or #chain == BACKUP_LINES then
 				break
 			end
+			local entry = slot.list[index]
+			if entry.stone == best.stone then
+				chain[#chain + 1] = entry
+				total = total + entry.count
+			end
 		end
-		slot.active = #lines
+	end
+	return chain
+end
+
+local function SetAction(slot)
+	slot.chain = GetChain(slot)
+	if #slot.chain == 0 then
+		slot:SetAttribute("*type1", nil)
+	elseif #slot.chain == 1 then
+		slot:SetAttribute("item", "item:" .. slot.chain[1].itemID)
+		slot:SetAttribute("*type1", "item")
+	else
+		local lines = {}
+		for index, entry in ipairs(slot.chain) do
+			lines[index] = "/use item:" .. entry.itemID
+		end
 		slot:SetAttribute("macrotext", table.concat(lines, "\n"))
 		slot:SetAttribute("*type1", "macro")
-	else
-		slot.active = 1
-		slot:SetAttribute("item", "item:" .. best.itemID)
-		slot:SetAttribute("*type1", "item")
 	end
 end
 
@@ -113,11 +127,11 @@ end
 -- Safe in combat: shows the item the button would use right now.
 function ns.UpdateDisplay()
 	for _, slot in ipairs(slots) do
-		local entry, count = slot.list[1], 0
-		for index = 1, slot.active do
-			local available = C_Item.GetItemCount(slot.list[index].itemID)
+		local entry, count = slot.chain[1], 0
+		for _, candidate in ipairs(slot.chain) do
+			local available = C_Item.GetItemCount(candidate.itemID)
 			if available > 0 then
-				entry, count = slot.list[index], available
+				entry, count = candidate, available
 				break
 			end
 		end

@@ -133,7 +133,7 @@ end
 local function CreateBarSection(parent, info, y)
 	local config = ns.db.bars[info.key]
 	local isPotion = info.key == "potion"
-	local show, attach
+	local show, attach, stones
 
 	CreateLabel(parent, "GameFontNormalLarge", info.label, PADDING, y)
 	y = y - 26
@@ -164,6 +164,13 @@ local function CreateBarSection(parent, info, y)
 		end)
 	end
 	y = y - 34
+
+	if isPotion then
+		stones = CreateCheckbox(parent, "Healthstones as health potions", PADDING, y + 6, function(checked)
+			ns.db.healthstones = checked
+		end)
+		y = y - 28
+	end
 
 	local horizontal = CreateRadio(parent, "Horizontal", PADDING, y, function()
 		config.vertical = false
@@ -201,6 +208,8 @@ local function CreateBarSection(parent, info, y)
 				radio:SetChecked(ns.db.attach == value)
 				SetControlEnabled(radio, config.enabled)
 			end
+			stones:SetChecked(ns.db.healthstones)
+			SetControlEnabled(stones, config.enabled and config.slots.health)
 		end
 	end
 	return y

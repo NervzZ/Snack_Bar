@@ -17,6 +17,7 @@ The game does not allow addons to change buttons in combat. If you loot better f
 Type `/snack` to choose:
 
 - which slots are shown
+- healthstones as health potions
 - potions on their own bar, or attached to the food and water bar in a line or a square
 - horizontal or vertical
 - size, gap and position, with numbers you can type
@@ -27,7 +28,7 @@ To move a bar, bring the mouse close to it and drag the small tab that appears.
 
 Settings are saved per character. Items are recognized in every client language; the options window is in English.
 
-Healthstones, mana gems and bandages are not included.
+Healthstones can count as health potions (an option), ranked by how much they heal. They have their own cooldown, so a click never uses a healthstone and a potion together. Mana gems and bandages are not included.
 
 ## Development
 

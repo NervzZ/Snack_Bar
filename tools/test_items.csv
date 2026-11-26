@@ -99,7 +99,11 @@ id,name,class,level,price,spell
 5478,Dig Rat Stew,0,15,70,435
 5479,Crispy Lizard Tail,0,5,125,1248381
 5480,Lean Venison,0,15,95,1248389
+5509,Healthstone,0,24,0,5720
+5510,Greater Healthstone,0,36,0,5723
+5511,Lesser Healthstone,0,12,0,6263
 5512,Minor Healthstone,0,1,0,6262
+5514,Mana Agate,4,23,0,5405
 5525,Boiled Clams,0,1,20,433
 5526,Clam Chowder,0,5,75,434
 5527,Goblin Deviled Clams,0,15,95,5006
@@ -136,6 +140,7 @@ id,name,class,level,price,spell
 8953,Deep Fried Plantains,0,45,200,1131
 8957,Spinefin Halibut,0,45,200,1249514
 9144,Wildvine Potion,0,35,250,11387
+9421,Major Healthstone,0,48,0,11732
 9451,Bubbling Water,0,15,25,432
 9681,Grilled King Crawler Legs,0,35,50,1129
 10841,Goldthorn Tea,0,25,85,1249906
@@ -144,6 +149,7 @@ id,name,class,level,price,spell
 11444,Grim Guzzler Boar,0,45,200,1131
 11584,Cactus Apple Surprise,0,0,1,5004
 11950,Windblossom Berries,0,45,0,26030
+11951,Whipper Root Tuber,0,45,0,15700
 12209,Lean Wolf Steak,0,15,95,1248387
 12210,Roast Raptor,0,15,300,1248388
 12212,Jungle Stew,0,35,300,1248395
@@ -205,6 +211,16 @@ id,name,class,level,price,spell
 18635,Bellara's Nutterbar,0,35,100,1129
 18839,Combat Healing Potion,0,35,250,4042
 18841,Combat Mana Potion,0,41,275,17530
+19004,Minor Healthstone,0,1,0,23468
+19005,Minor Healthstone,0,1,0,23469
+19006,Lesser Healthstone,0,12,0,23470
+19007,Lesser Healthstone,0,12,0,23471
+19008,Healthstone,0,24,0,23472
+19009,Healthstone,0,24,0,23473
+19010,Greater Healthstone,0,36,0,23474
+19011,Greater Healthstone,0,36,0,23475
+19012,Major Healthstone,0,48,0,23476
+19013,Major Healthstone,0,48,0,23477
 19060,Warsong Gulch Enriched Ration,0,45,100,23540
 19061,Warsong Gulch Iron Ration,0,35,75,23541
 19062,Warsong Gulch Field Ration,0,25,50,23542
